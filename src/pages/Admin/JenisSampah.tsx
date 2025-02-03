@@ -21,19 +21,7 @@ const JenisSampah = () => {
 
   const formik = useFormik({
     initialValues: {
-      price: "",
-      name: "",
-    },
-    validationSchema: schema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
-
-  const formikCreate = useFormik({
-    initialValues: {
       code: "",
-      price: "",
       name: "",
     },
     validationSchema: schema,
@@ -72,7 +60,6 @@ const JenisSampah = () => {
       showModal("edit-jenis-sampah");
       const sampah = response.data.data;
       formik.setFieldValue("code", sampah?.code);
-      formik.setFieldValue("price", sampah?.price);
       formik.setFieldValue("name", sampah?.name);
     } catch (error) {
       console.log(error);
@@ -81,10 +68,10 @@ const JenisSampah = () => {
 
   const CreateJenisSampah = async () => {
     try {
-      const { price, name } = formikCreate.values;
+      const { code, name } = formik.values;
       const data = {
-        code: price.toString(),
-        price: parseInt(price),
+        code: code.toString(),
+        price: code.toString(),
         name,
       };
       await BankSampah.createJenisSampah(token, data);
@@ -106,10 +93,10 @@ const JenisSampah = () => {
 
   const UpdateJenisSampah = async () => {
     try {
-      const { price, name } = formik.values;
+      const { code, name } = formik.values;
       const data = {
-        code: price.toString(),
-        price: parseInt(price),
+        code: code.toString(),
+        price: code.toString(),
         name,
       };
       await BankSampah.updateJenisSampah(token, idJenisSampah, data);
@@ -234,7 +221,7 @@ const JenisSampah = () => {
           <div className="w-full flex justify-center items-center flex-col">
             <span className="text-xl font-bold">Tambah Jenis Sampah</span>
             <form
-              onSubmit={formikCreate.handleSubmit}
+              onSubmit={formik.handleSubmit}
               className="flex justify-start w-full flex-col gap-3"
             >
               <div className="w-full flex flex-col gap-2">
@@ -243,15 +230,15 @@ const JenisSampah = () => {
                   type="text"
                   placeholder="Jenis Sampah"
                   className={`input input-bordered w-full ${
-                    formikCreate.touched.name && formikCreate.errors.name
+                    formik.touched.name && formik.errors.name
                       ? "input-error"
                       : ""
                   }`}
                   name="name"
-                  value={formikCreate.values.name}
-                  onBlur={formikCreate.handleBlur}
+                  value={formik.values.name}
+                  onBlur={formik.handleBlur}
                   onChange={(e) => {
-                    formikCreate.handleChange(e);
+                    formik.handleChange(e);
                   }}
                 />
               </div>
@@ -261,15 +248,15 @@ const JenisSampah = () => {
                   type="number"
                   placeholder="2000"
                   className={`input input-bordered w-full  ${
-                    formikCreate.touched.price && formikCreate.errors.price
+                    formik.touched.code && formik.errors.code
                       ? "input-error"
                       : ""
                   } `}
-                  name="price"
-                  value={formikCreate.values.price}
+                  name="code"
+                  value={formik.values.code}
                   onBlur={formik.handleBlur}
                   onChange={(e) => {
-                    formikCreate.handleChange(e);
+                    formik.handleChange(e);
                   }}
                 />
               </div>
@@ -315,12 +302,12 @@ const JenisSampah = () => {
                   type="number"
                   placeholder="2000"
                   className={`input input-bordered w-full  ${
-                    formik.touched.price && formik.errors.price
+                    formik.touched.code && formik.errors.code
                       ? "input-error"
                       : ""
                   } `}
-                  name="price"
-                  value={formik.values.price}
+                  name="code"
+                  value={formik.values.code}
                   onBlur={formik.handleBlur}
                   onChange={(e) => {
                     formik.handleChange(e);
