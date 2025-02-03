@@ -59,8 +59,6 @@ const DataSiswaKlass = () => {
     navigate("/admin/export-qr");
   };
 
-  console.log("teet");
-
   return (
     <>
       <div className="p-5 w-full">
