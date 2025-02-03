@@ -10,7 +10,7 @@ import * as htmlToImage from "html-to-image";
 
 const DataSiswaKlass = () => {
   const { token } = LoginStore();
-  const { setIdKelas, setTahun} = useProps();
+  const { setIdKelas, setTahun } = useProps();
   const navigate = useNavigate();
   const [siswa, setSiswa] = useState<InclassStudent[]>([]);
   const [kelas, setKelas] = useState<Class[]>([]);
@@ -54,11 +54,12 @@ const DataSiswaKlass = () => {
   };
 
   const handleExport = () => {
-    setIdKelas(idKelas)
-    setTahun(tahunPel)
-    navigate('/admin/export-qr')
+    setIdKelas(idKelas);
+    setTahun(tahunPel);
+    navigate("/admin/export-qr");
+  };
 
-  }
+  console.log("test");
 
   return (
     <>
@@ -96,7 +97,10 @@ const DataSiswaKlass = () => {
             </select>
           </label>
 
-          <button className="btn btn-ghost bg-blue-500 text-white hover:bg-blue-400" onClick={handleExport}>
+          <button
+            className="btn btn-ghost bg-blue-500 text-white hover:bg-blue-400"
+            onClick={handleExport}
+          >
             Eksport Data
           </button>
         </div>
