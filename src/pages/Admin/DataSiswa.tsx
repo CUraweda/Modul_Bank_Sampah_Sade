@@ -59,7 +59,7 @@ const DataSiswaKlass = () => {
     navigate("/admin/export-qr");
   };
 
-  console.log("test");
+  console.log("teet");
 
   return (
     <>
