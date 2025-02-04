@@ -58,6 +58,8 @@ const DaftarPetugas = () => {
     worksheet["!cols"] = wscols;
     XLSX.writeFile(workbook, `Data_Petugas_${date}.xlsx`);
   };
+
+  console.log("test");
   return (
     <>
       <div className="p-5 w-full">
