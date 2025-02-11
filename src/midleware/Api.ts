@@ -101,11 +101,12 @@ const DaftarDataPetugas = {
   GetAllDataPetugas: (
     token: string | null,
     date: string | null,
-    iteration: string | null
+    iteration: string | null,
+    class_id: string | null
   ): AxiosPromise<DataPetugasResponse> =>
     instance({
       method: "GET",
-      url: `/waste-officer?date=${date}&iteration=${iteration}`,
+      url: `/waste-officer?date=${date}&iteration=${iteration}&class_id=${class_id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

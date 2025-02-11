@@ -1,4 +1,4 @@
-import { DaftarDataPetugas } from "../../midleware/Api";
+import { DaftarDataPetugas, Kelas } from "../../midleware/Api";
 import { useState, useEffect } from "react";
 import { LoginStore } from "../../store/Store";
 import { ItemDataPetugas } from "../../midleware/Utils";
@@ -7,6 +7,8 @@ import * as XLSX from "xlsx";
 const DaftarPetugas = () => {
   const { token } = LoginStore();
   const [dataPetugas, setdataPetugas] = useState<ItemDataPetugas[]>([]);
+  const [dataKelas, setDataKelas] = useState<any[]>([]);
+  const [selectKelas, setSelectKelas] = useState("");
 
   // const currentDate = new Date();
   // const formattedDate = currentDate.toISOString().split("T")[0];
@@ -14,7 +16,7 @@ const DaftarPetugas = () => {
   const [filterType, setFilterType] = useState("");
   useEffect(() => {
     fetchData();
-  }, [date, filterType]);
+  }, [date, filterType, selectKelas]);
 
   const fetchData = async () => {
     // setLoading(true);
@@ -22,8 +24,11 @@ const DaftarPetugas = () => {
       const response = await DaftarDataPetugas.GetAllDataPetugas(
         token,
         date,
-        filterType
+        filterType,
+        selectKelas
       );
+      const responseKelas = await Kelas.GetAllKelas(token);
+      setDataKelas(responseKelas.data.data.result);
       // const data = response.data.data.result;
       // const dataFilter = data.filter((value) => value.assignment_date == date);
       setdataPetugas(response.data.data.result);
@@ -87,6 +92,21 @@ const DaftarPetugas = () => {
               <option value="week">Perminggu</option>
               <option value="month">Perbulan</option>
               <option value="year">Pertahun</option>
+            </select>
+          </label>
+
+          <label className="form-control w-md">
+            <span className="label-text">Kelas</span>
+            <select
+              className="select select-bordered w-md"
+              onChange={(e) => setSelectKelas(e.target.value)}
+            >
+              <option value="">Pilih Kelas</option>
+              {dataKelas.map((item, index) => (
+                <option value={item.id} key={index}>
+                  {item.class_name}
+                </option>
+              ))}
             </select>
           </label>
 
