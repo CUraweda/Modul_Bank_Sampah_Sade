@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: / # Ganti dengan path direktori di cPanel Anda
+          server-dir: /public_html/bank-sampah.curaweda.com/
